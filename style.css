@@ -49,7 +49,6 @@
 }
 
 .inp>button{
-    margin-left: 10px;
     padding-top: 7px;
     padding-right: 25px;
     padding-left: 22px;
@@ -63,3 +62,15 @@
     cursor: pointer;
 }
 
+/* display Css */
+.display{
+    padding: 20px;
+    padding-top: 40px;
+}
+.main{
+    padding-top: 20px;
+    padding-bottom: 50px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
