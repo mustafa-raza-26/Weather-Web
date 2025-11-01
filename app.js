@@ -1,6 +1,7 @@
 let input = document.getElementById('input');
 let cross = document.getElementById('cross');
-
+let display = document.getElementById('display');
+let win = document.getElementById('wind');
 input.addEventListener('input', function(){
   if (input.value !== '') {
     cross.style.display = 'block'
@@ -13,36 +14,41 @@ cross.addEventListener('click', function() {
 
 
 async function getWeather(){
-  let cityName = document.getElementById("input").value;
-  if(cityName === "") return alert("Please enter a city name");
+  let location = document.getElementById("input").value;
+  if(location === "") return alert("Please enter a city name");
 
   // Step 1: Get Latitude & Longitude using geocoding API
-  let geoAPI = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${cityName}`);
+  let geoAPI = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`);
   let geoData = await geoAPI.json();
 
-  if(!geoData.results){
-    document.getElementById("result").innerHTML = "<h3>City not found.</h3>";
+  if(!geoData.results || geoData.results.length === 0){
+    console.log('City is not found.....');
     return;
   }
-
+  
   let lat = geoData.results[0].latitude;
   let lon = geoData.results[0].longitude;
 
   // Step 2: Fetch weather info
   let weatherAPI = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m`);
   let weatherData = await weatherAPI.json();
-
+  console.log(weatherData);
+  
+  let time = weatherData.current.time
   let temp = weatherData.current.temperature_2m;
   let wind = weatherData.current.wind_speed_10m;
+  let nTemp = Math.ceil(temp)
 
   // Step 3: Display results
-  document.getElementById("result").innerHTML = `
-    <div class="card bg-secondary p-3">
-      <h2>${geoData.results[0].name}</h2>
-      <p><strong>Temperature:</strong> ${temp}°C</p>
-      <p><strong>Wind Speed:</strong> ${wind} km/h</p>
-    </div>
+  display.innerHTML = `
+    <h1>${nTemp}<sup>o</sup>C</h1>
+    <h2>${time}</h2>
   `;
+  
+  win.innerText = `
+  ${wind} Km/h
+  `
+
 }
 
 // let input = document.getElementById('input');
