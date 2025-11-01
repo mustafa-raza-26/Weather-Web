@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="shortcut icon" href="img/fav.webp" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/63fac70219.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -15,10 +15,10 @@
     <div class="container">
       <div class="row">
         <div class="left col-12 col-md-6 col-lg-6">
-          <div class="row inp justify-content-center align-items-center gap-3"> <span class="col-12 col-md-9 srch d-flex align-items-center"> <i class="fa-solid fa-location-dot"></i> <input class="col-8 col-md-10 input" id="input" type="text"  class="input" placeholder="Enter City Name..."> <i class="fa-solid fa-xmark" id="cross" style="cursor: pointer; display: none;" ></i>    </span> <button class="col-5 col-md-2">Search</button></div>
+          <div class="row inp justify-content-center align-items-center gap-3"> <span class="col-12 col-md-9 srch d-flex align-items-center"> <i class="fa-solid fa-location-dot"></i> <input class="col-8 col-md-10 input" id="input" type="text"  class="input" placeholder="Enter City Name..."> <i class="fa-solid fa-xmark" id="cross" style="cursor: pointer; display: none;" ></i>    </span> <button onclick="getWeather()" class="col-5 col-md-2">Search</button></div>
           <div class="row display">
             <div class="main"><h1>ABC <sup>o</sup>C</h1> <h2>Summer day</h2> <p>Today is abc degree</p> </div>
-            <div class=" row crd d-flex">
+            <div class=" row crd d-flex justify-content-center align-items-center">
               <div class="card col-10 col-md-5 p-3 m-3"><span class="d-flex"> <i class="fa-solid fa-temperature-three-quarters p-2"></i> <h6 class="p-1">FEELS LIKE</h6></span> <h3>30</h3> <p>Humidity</p></div>
               <div class="card col-10 col-md-5 p-3 m-3"><span class="d-flex"> <i class="fa-solid fa-droplet p-2"></i> <h6 class="p-1">PRECIPITATION</h6></span> <h3>30''</h3> <p>Humidity</p></div>
               <div class="card col-10 col-md-5 p-3 m-3"><span class="d-flex"> <i class="fa-solid fa-eye p-2"></i> <h6 class="p-1">FEELS LIKE</h6></span> <h3>30</h3> <p>Humidity</p></div>
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="row right col-12 col-md-6 col-md-6">
-              <div class="hourly"></div>
+              <div class="hourly"><span class="d-flex"><i class="fa-regular fa-clock p-1" style="font-size: 20px;"></i> <h6 class="p-1">HOURLY FORECAST</h6></span></div>
               <div class="forecast"></div>
               <div class="uv"></div>
         </div>

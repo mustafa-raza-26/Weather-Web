@@ -13,7 +13,7 @@ cross.addEventListener('click', function() {
 
 
 async function getWeather(){
-  let cityName = document.getElementById("city").value;
+  let cityName = document.getElementById("input").value;
   if(cityName === "") return alert("Please enter a city name");
 
   // Step 1: Get Latitude & Longitude using geocoding API
