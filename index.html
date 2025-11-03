@@ -17,7 +17,7 @@
         <div class="left col-12 col-md-6 col-lg-6">
           <div class="row inp justify-content-center align-items-center gap-3"> <span class="col-12 col-md-9 srch d-flex align-items-center"> <i class="fa-solid fa-location-dot"></i> <input class="col-8 col-md-10 input" id="input" type="text"  class="input" placeholder="Enter City Name..."> <i class="fa-solid fa-xmark" id="cross" style="cursor: pointer; display: none;" ></i> </span> <button onclick="getWeather()" class="col-5 col-md-2">Search</button></div>
           <div class="row display">
-            <div class="main" id="display"><h1>ABC <sup>o</sup>C</h1> <h2>Summer day</h2> <p>Today is abc degree</p> </div>
+            <div class="main" ><span id="display"><h1>ABC <sup>o</sup>C</h1></span> <h2 id="day">Summer day</h2> </div>
             <div class=" row crd d-flex justify-content-center align-items-center">
               <div class="card col-10 col-md-5 p-3 m-3"><span class="d-flex"> <i class="fa-solid fa-temperature-three-quarters p-2"></i> <h6 class="p-1">FEELS LIKE</h6></span> <h3>30 <sup>o</sup>C  </h3> <p>Humidity</p></div>
               <div class="card col-10 col-md-5 p-3 m-3"><span class="d-flex"> <i class="fa-solid fa-droplet p-2"></i> <h6 class="p-1">PRECIPITATION</h6></span> <h3>30''</h3> <p>Humidity</p></div>
@@ -27,8 +27,10 @@
           </div>
         </div>
         <div class="row right col-12 col-md-6 col-md-6">
-              <div class="hourly"><span class="d-flex"><i class="fa-regular fa-clock p-1" style="font-size: 20px;"></i> <h6 class="p-1">HOURLY FORECAST</h6></span></div>
-              <div class="forecast"></div>
+              <div class="hourly"><span class="d-flex"><i class="fa-regular fa-clock p-1" style="font-size: 20px;"></i> <h6 class="p-1">HOURLY FORECAST</h6></span>
+              <div id="hourly"></div>
+              </div>
+              <div class="forecast" ></div>
               <div class="uv"></div>
         </div>
       </div>

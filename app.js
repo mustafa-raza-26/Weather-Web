@@ -2,6 +2,11 @@ let input = document.getElementById('input');
 let cross = document.getElementById('cross');
 let display = document.getElementById('display');
 let win = document.getElementById('wind');
+let currentWeather = document.getElementById('day');
+
+
+
+
 input.addEventListener('input', function(){
   if (input.value !== '') {
     cross.style.display = 'block'
@@ -39,15 +44,48 @@ async function getWeather(){
   let wind = weatherData.current.wind_speed_10m;
   let nTemp = Math.ceil(temp)
 
+  if (nTemp >=30) {
+    currentWeather.innerText = "Hot Weather";
+    console.log("Hot Weather");
+  }
+  else if (nTemp >= 20 && nTemp < 30) {
+    currentWeather.innerText = "Warm Weather";
+    console.log("Warm Weather");
+  }
+  else if (nTemp < 20) {
+    currentWeather.innerText = "Cold Weather";
+  }
+  else{
+    currentWeather.innerText = "Invalid"
+  }
+
   // Step 3: Display results
-  display.innerHTML = `
-    <h1>${nTemp}<sup>o</sup>C</h1>
-    <h2>${time}</h2>
-  `;
+  display.innerHTML = `<h1>${nTemp}<sup>o</sup>C</h1>`;
+  win.innerText = `${wind} Km/h`;
+
+
+
+
+  let hourlyApi = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m&hourly=temperature_2m`);
+  let hourlyJson = await hourlyApi.json();
+
+  let hourlyData = hourlyJson.hourly;
+  let hours = hourlyData.time;
+  let temps = hourlyData.temperature_2m;
+  console.log(temps);
   
-  win.innerText = `
-  ${wind} Km/h
-  `
+
+  let hourlyDiv = document.getElementById('hourly');
+  hourlyDiv.innerHTML = "";
+
+  for(let i = 0; i < 12; i++){
+    hourlyDiv.innerHTML += `
+      <div class="hourBox">
+      <h3>${Math.round(Math.ceil(temps[i]))}°C</h3>
+      <p>${hours[i].slice(11, 17)}</p>
+      </div>
+    `;
+  }
 
 }
 
