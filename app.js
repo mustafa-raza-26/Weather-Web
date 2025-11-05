@@ -75,14 +75,19 @@ async function getWeather(){
   console.log(temps);
   
 
-  let hourlyDiv = document.getElementById('hourly');
+  let hourlyDiv = document.getElementById('box');
   hourlyDiv.innerHTML = "";
-
+  
   for(let i = 0; i < 12; i++){
+    let timeText = hours[i].slice(11,16);
+
+    if (i === 0) {
+      timeText = 'Now'
+    }
     hourlyDiv.innerHTML += `
-      <div class="hourBox">
+      <div class="cd">
+      <p>${timeText}</p>
       <h3>${Math.round(Math.ceil(temps[i]))}°C</h3>
-      <p>${hours[i].slice(11, 17)}</p>
       </div>
     `;
   }
