@@ -2,6 +2,7 @@ let input = document.getElementById('input');
 let cross = document.getElementById('cross');
 let display = document.getElementById('display');
 let win = document.getElementById('wind');
+let precipetation = document.getElementById('preci');
 let currentWeather = document.getElementById('day');
 
 
@@ -42,6 +43,9 @@ async function getWeather(){
   let time = weatherData.current.time
   let temp = weatherData.current.temperature_2m;
   let wind = weatherData.current.wind_speed_10m;
+  let rain = weatherData.current.precipitation; 
+  console.log(rain);
+  
   let nTemp = Math.ceil(temp)
 
   if (nTemp >=30) {
@@ -62,7 +66,7 @@ async function getWeather(){
   // Step 3: Display results
   display.innerHTML = `<h1>${nTemp}<sup>o</sup>C</h1>`;
   win.innerText = `${wind} Km/h`;
-
+  precipetation.innerText = `${rain}`
 
 
 
@@ -91,6 +95,33 @@ async function getWeather(){
       </div>
     `;
   }
+
+  let dailyAPI = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto`);
+  let dailyData = await dailyAPI.json();
+  console.log(dailyData);
+
+let days = dailyData.daily.time;
+let maxTemp = dailyData.daily.temperature_2m_max;
+let minTemp = dailyData.daily.temperature_2m_min;
+
+function getDayName(dateString){
+  let date = new Date(dateString);
+  return date.toLocaleDateString("en-US", { weekday: "short" });
+}
+
+let dailyDiv = document.getElementById('box1');
+dailyDiv.innerHTML = ""; 
+
+for(let i = 0; i < 7; i++){
+  dailyDiv.innerHTML += `
+    <div class="cd">
+      <p>${getDayName(days[i])}</p>
+      <p>${Math.round(maxTemp[i])}°C ${Math.round(minTemp[i])}°C</p>
+    </div>
+  `;
+}
+
+
 
 }
 
