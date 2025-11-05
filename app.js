@@ -1,7 +1,9 @@
 let input = document.getElementById('input');
 let cross = document.getElementById('cross');
 let display = document.getElementById('display');
+let feels = document.getElementById('feel');
 let win = document.getElementById('wind');
+let humidity = document.getElementById('humidi');
 let precipetation = document.getElementById('preci');
 let currentWeather = document.getElementById('day');
 
@@ -23,7 +25,6 @@ async function getWeather(){
   let location = document.getElementById("input").value;
   if(location === "") return alert("Please enter a city name");
 
-  // Step 1: Get Latitude & Longitude using geocoding API
   let geoAPI = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`);
   let geoData = await geoAPI.json();
 
@@ -36,15 +37,17 @@ async function getWeather(){
   let lon = geoData.results[0].longitude;
 
   // Step 2: Fetch weather info
-  let weatherAPI = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m`);
+  let weatherAPI = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,apparent_temperature,wind_speed_10m,relative_humidity_2m,precipitation`);
   let weatherData = await weatherAPI.json();
-  console.log(weatherData);
-  
-  let time = weatherData.current.time
+
   let temp = weatherData.current.temperature_2m;
+  let feel = weatherData.current.apparent_temperature;
+  let nfeel = Math.ceil(feel)
+
+  let rain = weatherData.current.precipitation;
   let wind = weatherData.current.wind_speed_10m;
-  let rain = weatherData.current.precipitation; 
-  console.log(rain);
+  let humidi = weatherData.current.relative_humidity_2m; 
+
   
   let nTemp = Math.ceil(temp)
 
@@ -65,9 +68,10 @@ async function getWeather(){
 
   // Step 3: Display results
   display.innerHTML = `<h1>${nTemp}<sup>o</sup>C</h1>`;
+  feels.innerText = `${nfeel}`
+  precipetation.innerText = `${rain} mm`
   win.innerText = `${wind} Km/h`;
-  precipetation.innerText = `${rain}`
-
+  humidity.innerText = `${humidi}%`
 
 
   let hourlyApi = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m&hourly=temperature_2m`);
@@ -76,9 +80,7 @@ async function getWeather(){
   let hourlyData = hourlyJson.hourly;
   let hours = hourlyData.time;
   let temps = hourlyData.temperature_2m;
-  console.log(temps);
   
-
   let hourlyDiv = document.getElementById('box');
   hourlyDiv.innerHTML = "";
   
