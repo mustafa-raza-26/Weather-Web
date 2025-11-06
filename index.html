@@ -17,20 +17,22 @@
         <div class="left col-12 col-md-6 col-lg-6">
           <div class="row inp justify-content-center align-items-center gap-3"> <span class="col-12 col-md-9 srch d-flex align-items-center"> <i class="fa-solid fa-location-dot"></i> <input class="col-8 col-md-10 input" id="input" type="text"  class="input" placeholder="Enter City Name..."> <i class="fa-solid fa-xmark" id="cross" style="cursor: pointer; display: none;" ></i> </span> <button onclick="getWeather()" class="col-5 col-md-2">Search</button></div>
           <div class="row display">
-            <div class="main" ><span id="display"><h1>ABC <sup>o</sup>C</h1></span> <h2 id="day">Summer day</h2> </div>
+            <div class="main" ><span id="display"><h1>ABC <sup>o</sup>C</h1></span> <h2 id="day"></h2> </div>
             <div class=" row crd d-flex justify-content-center align-items-center">
-              <div class="card col-10 col-md-5 p-3 m-3"><span class="d-flex"> <i class="fa-solid fa-temperature-three-quarters p-2"></i> <h6 class="p-1">FEELS LIKE</h6></span> <h3 id="feel">-- <sup>o</sup>C </h3></div>
-              <div class="card col-10 col-md-5 p-3 m-3"><span class="d-flex"> <i class="fa-solid fa-droplet p-2"></i> <h6 class="p-1">PRECIPITATION</h6></span> <h3 id="preci">30''</h3></div>
-              <div class="card col-10 col-md-5 p-3 m-3"><span class="d-flex"> <i class="fa-solid fa-eye p-2"></i> <h6 class="p-1">WIND</h6></span> <h3 id="wind">30</h3></div>
-              <div class="card col-10 col-md-5 p-3 m-3"><span class="d-flex"> <i class="fa-solid fa-droplet p-2"></i> <h6 class="p-1">HUMIDITY</h6></span> <h3 id="humidi">30%</h3></div>
+              <div class="card col-10 col-md-4 p-3 m-3"><span class="d-flex"> <i class="fa-solid fa-temperature-three-quarters p-2"></i> <h6 class="p-1">FEELS LIKE</h6></span> <h3 id="feel">-- <sup>o</sup>C </h3></div>
+              <div class="card col-10 col-md-4 p-3 m-3"><span class="d-flex"> <i class="fa-solid fa-droplet p-2"></i> <h6 class="p-1">PRECIPITATION</h6></span> <h3 id="preci">--''</h3></div>
+              <div class="card col-10 col-md-4 p-3 m-3"><span class="d-flex"> <i class="fa-solid fa-eye p-2"></i> <h6 class="p-1">WIND</h6></span> <h3 id="wind">--</h3></div>
+              <div class="card col-10 col-md-4 p-3 m-3"><span class="d-flex"> <i class="fa-solid fa-droplet p-2"></i> <h6 class="p-1">HUMIDITY</h6></span> <h3 id="humidi">--%</h3></div>
             </div>
           </div>
         </div>
         <div class="row right col-12 col-md-6 col-md-6">
               <div class="hourly"><span class="d-flex"><i class="fa-regular fa-clock p-1" style="font-size: 20px;"></i> <h6 class="p-1">HOURLY FORECAST</h6></span>
+                <hr>
               <div id="box"></div>
               </div>
               <div class="forecast"> <span class="d-flex"><i class="fa-regular fa-calendar p-1" style="font-size: 20px;"></i> <h6 class="p-1">DAILY FORECAST</h6></span>
+              <hr>
               <div id="box1"></div>
               </div>
         </div>
