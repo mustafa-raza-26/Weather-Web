@@ -20,16 +20,20 @@ cross.addEventListener('click', function() {
   cross.style.display = 'none';
 })
 
+window.onload = function () {
+  input.value = "Islamabad";
+  getWeather();
+};
 
 async function getWeather(){
-  let location = document.getElementById("input").value;
+  let location = document.getElementById("input").value.toLowerCase();
   if(location === "") return alert("Please enter a city name");
 
   let geoAPI = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`);
   let geoData = await geoAPI.json();
 
   if(!geoData.results || geoData.results.length === 0){
-    console.log('City is not found.....');
+    alert('City is not found.....');
     return;
   }
   
@@ -53,11 +57,9 @@ async function getWeather(){
 
   if (nTemp >=30) {
     currentWeather.innerText = "Hot Weather";
-    console.log("Hot Weather");
   }
   else if (nTemp >= 20 && nTemp < 30) {
     currentWeather.innerText = "Warm Weather";
-    console.log("Warm Weather");
   }
   else if (nTemp < 20) {
     currentWeather.innerText = "Cold Weather";
@@ -68,10 +70,11 @@ async function getWeather(){
 
   // Step 3: Display results
   display.innerHTML = `<h1>${nTemp}<sup>o</sup>C</h1>`;
-  feels.innerText = `${nfeel}`
-  precipetation.innerText = `${rain} mm`
+  feels.innerHTML = `${nfeel}<sup>o</sup>C`;
+  precipetation.innerText = `${rain} mm`;
   win.innerText = `${wind} Km/h`;
-  humidity.innerText = `${humidi}%`
+  humidity.innerText = `${humidi}%`;
+
 
 
   let hourlyApi = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m&hourly=temperature_2m`);
@@ -100,54 +103,25 @@ async function getWeather(){
 
   let dailyAPI = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto`);
   let dailyData = await dailyAPI.json();
-  console.log(dailyData);
 
-let days = dailyData.daily.time;
-let maxTemp = dailyData.daily.temperature_2m_max;
-let minTemp = dailyData.daily.temperature_2m_min;
+  let days = dailyData.daily.time;
+  let maxTemp = dailyData.daily.temperature_2m_max;
+  let minTemp = dailyData.daily.temperature_2m_min;
 
-function getDayName(dateString){
-  let date = new Date(dateString);
-  return date.toLocaleDateString("en-US", { weekday: "short" });
-}
+  function getDayName(dateString){
+    let date = new Date(dateString);
+    return date.toLocaleDateString("en-US", { weekday: "short" });
+  }
 
-let dailyDiv = document.getElementById('box1');
-dailyDiv.innerHTML = ""; 
+  let dailyDiv = document.getElementById('box1');
+  dailyDiv.innerHTML = ""; 
 
-for(let i = 0; i < 7; i++){
-  dailyDiv.innerHTML += `
-    <div class="cd">
-      <p>${getDayName(days[i])}</p>
-      <p>${Math.round(maxTemp[i])}°C ${Math.round(minTemp[i])}°C</p>
-    </div>
-  `;
-}
-
-
-
-}
-
-// let input = document.getElementById('input');
-// let display = document.getElementById('main');
-
-// async function fetchData() {
-//     const API = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${input.value}`)
-//     const data = await API.json()
-//     const weather = data.results[0]
-    
-//     // for (let i = 0; i < data.results.length; i++) {
-//     //     let weather = data.results[i]
-        
-//         display.innerHTML += `
-//             <div id="box">
-//                 <h4>Name: ${weather.name}</h4>
-//                 <p>Latitude: ${weather.latitude} <br></p>
-//                 <p>Longitude: ${weather.longitude} <br></p>
-//                 <p>Country_code: ${weather.country_code} <br></p>
-//                 <p>Timezone: ${weather.timezone} <br></p>
-//                 <p>Country: ${weather.country} <br></p>
-//                 <p>Province: ${weather.admin1} <br></p>
-//             </div>`
-        
-//     // }
-// }
+  for(let i = 0; i < 7; i++){
+    dailyDiv.innerHTML += `
+      <div class="cd">
+        <p>${getDayName(days[i])}</p>
+        <p>${Math.round(maxTemp[i])}°C ${Math.round(minTemp[i])}°C</p>
+      </div>
+    `;
+  }
+  }
