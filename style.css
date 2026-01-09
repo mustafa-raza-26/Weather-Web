@@ -1,8 +1,10 @@
+.body{
+    background-color: #80dfff;
+    color: #ffffff;
+}
 *{
     margin: 0;
     padding: 0;
-    /* background-color: #23263f; */
-    /* border: 1px solid red; */
 }
 
 .part{
@@ -15,10 +17,15 @@
 .container{
     padding: 10px;
 }
+.bod{
+    border: 2px solid #9f9f9f;
+    border-radius: 12px;
+}
 
 /* Left Css*/
 .row>.left{
     padding: 10px;
+    border-right: 2px solid #9f9f9f;
 }
 .left>.inp{
     padding: 5px;
@@ -65,13 +72,13 @@
 }
 
 /* display Css */
-.display{
+.row .display{
     padding: 20px;
-    padding-top: 40px;
+    /* padding-top: 40px; */
 }
-.main{
+.row .main{
     padding-top: 20px;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -85,6 +92,9 @@
     padding-left: 25px;
 }
 /* Right CSS */
+.row>.right{
+    padding-left: 50px;
+}
 .right{
     padding: 10px;
     padding-left: 60px;

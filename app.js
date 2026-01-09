@@ -49,7 +49,7 @@ async function getWeather(){
   let nfeel = Math.ceil(feel)
 
   let rain = weatherData.current.precipitation;
-  let wind = weatherData.current.wind_speed_10m;
+  let wind = Math.ceil(weatherData.current.wind_speed_10m);
   let humidi = weatherData.current.relative_humidity_2m; 
 
   
@@ -120,7 +120,7 @@ async function getWeather(){
     dailyDiv.innerHTML += `
       <div class="cd">
         <p>${getDayName(days[i])}</p>
-        <p>${Math.round(maxTemp[i])}°C ${Math.round(minTemp[i])}°C</p>
+        <p>${Math.round(maxTemp[i])}°C / ${Math.round(minTemp[i])}°C</p>
       </div>
     `;
   }
