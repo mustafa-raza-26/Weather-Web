@@ -29,7 +29,7 @@ async function getWeather(){
   let location = document.getElementById("input").value.toLowerCase();
   if(location === "") return alert("Please enter a city name");
 
-  let geoAPI = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`);
+  let geoAPI = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}`);
   let geoData = await geoAPI.json();
 
   if(!geoData.results || geoData.results.length === 0){
